@@ -24,9 +24,9 @@
 
 <body>
   <a
-    href="https://line-circle-d110b2.webflow.io/?fbclid=IwAR19WPFvAUatym5kRYYYpg1dkLxcygy8cd8MXPt08qDjKCgSeHQJoRxD_l8#">Webflow
-    link
-  </a>
+    href="https://line-circle-d110b2.webflow.io/?fbclid=IwAR19WPFvAUatym5kRYYYpg1dkLxcygy8cd8MXPt08qDjKCgSeHQJoRxD_l8#">
+    Webflow link
+  </a><br />
   <form id="register-form">
     Channel ID: <input type="text" name="channelAccessToken" /><br />
     Channel secret: <input type="text" name="channelSecret" /><br /><br />
@@ -35,9 +35,9 @@
     <input type="button" onclick="register()" value="Submit" />
   </form>
 
-
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
   <script>
     async function register() {
       let body = {
@@ -59,10 +59,12 @@
       try {
         const lineUserProfile = await this.getUserProfile()
         body["uuid"] = lineUserProfile.userId
+        console.log("🚀 ~ file: index.html:67 ~ body:", body)
 
-        const BASE_URL = 'https://3e64-49-49-248-244.ap.ngrok.io';
-        const response = await axios.post(`${BASE_URL}/registerlineoa`, body);
-        console.log("🚀 ~ file: index.html:64 ~ response:", response)
+        axios.defaults.baseURL = 'https://3e64-49-49-248-244.ap.ngrok.io';
+
+        const response = await axios.post(`/registerlineoa`, body);
+        console.log("🚀 ~ file: index.html:67 ~ response:", response)
       } catch (errors) {
         console.error(errors);
       }
@@ -86,27 +88,6 @@
       }
       return profile
     }
-    // async function getUserProfile() {
-    //   const profile = await liff.getProfile()
-    //   document.getElementById("pictureUrl").style.display = "block"
-    //   document.getElementById("pictureUrl").src = profile.pictureUrl
-    // }
-    // async function main() {
-    //   await liff.init({ liffId: "1660664547-k8RXXlqX" })
-    //   if (liff.isInClient()) {
-    //     getUserProfile()
-    //   } else {
-    //     if (liff.isLoggedIn()) {
-    //       getUserProfile()
-    //       document.getElementById("btnLogIn").style.display = "none"
-    //       document.getElementById("btnLogOut").style.display = "block"
-    //     } else {
-    //       document.getElementById("btnLogIn").style.display = "block"
-    //       document.getElementById("btnLogOut").style.display = "none"
-    //     }
-    //   }
-    // }
-    // main()
   </script>
 </body>
 
