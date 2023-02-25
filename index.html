@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0,viewport-fit=cover">
   <title>My LIFF app</title>
   <link rel="stylesheet" href="css/style.css" media="all">
 </head>
+
 <body>
   <p id="os"><b>OS:</b> </p>
   <p id="language"><b>Language:</b> </p>
@@ -72,16 +74,19 @@
     }
 
     async function getUserProfile() {
+      const profile = await liff.getProfile()
+      profile.getElementById("pictureUrl").src = profile.pictureUrl
+      profile.getElementById("userId").append(profile.userId)
     }
 
     function getEnvironment() {
+      document.getElementById("os").append(liff.getOS())
     }
 
     async function main() {
-      alert("LINE Developers x Skooldio")
-      await liff.init({ liffId: "YOUR-LIFF-ID" })
+      await liff.init({ liffId: "1660664547-5b0zzMoz" })
       // getEnvironment()
-      // getUserProfile()
+      await getUserProfile()
       // getContext()
       // getFriendship()
       // createUniversalLink()
@@ -89,4 +94,5 @@
     main()
   </script>
 </body>
+
 </html>
