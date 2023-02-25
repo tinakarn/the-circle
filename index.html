@@ -34,7 +34,7 @@
       window.location.reload()
     }
     function logIn() {
-      liff.login({ redirectUri: window.location.href() })
+      liff.login({ redirectUri: window.location.href })
     }
     async function getUserProfile() {
       const profile = await liff.getProfile()
