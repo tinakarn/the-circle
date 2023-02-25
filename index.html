@@ -36,7 +36,7 @@
   </form>
 
 
-
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
     async function register() {
@@ -49,14 +49,23 @@
 
       for (const key in body) {
         const value = document.getElementsByName(key)[0].value
-        body[key] = value
+        if (key === 'cta') {
+          body[key] = [value]
+        } else {
+          body[key] = value
+        }
       }
-      console.log("🚀 ~ file: index.html:50 ~ body:", body)
 
-      const lineUserProfile = await this.getUserProfile()
-      console.log(`lineUserProfile => `, lineUserProfile)
+      try {
+        const lineUserProfile = await this.getUserProfile()
+        body["uuid"] = lineUserProfile.userId
 
-      // document.getElementById("demo").innerHTML = text;
+        const BASE_URL = 'https://3e64-49-49-248-244.ap.ngrok.io';
+        const response = await axios.post(`${BASE_URL}/registerlineoa`, body);
+        console.log("🚀 ~ file: index.html:64 ~ response:", response)
+      } catch (errors) {
+        console.error(errors);
+      }
     }
     function logOut() {
       liff.logout()
