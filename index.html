@@ -83,7 +83,8 @@
     }
 
     async function main() {
-      await liff.init({ liffId: "1660664547-5b0zzMoz" })
+      const liffId = "1660664547-5b0zzMoz"
+      await liff.init({ liffId })
       // getEnvironment()
       getUserProfile()
       // getContext()
