@@ -23,20 +23,40 @@
 </head>
 
 <body>
+  <a
+    href="https://line-circle-d110b2.webflow.io/?fbclid=IwAR19WPFvAUatym5kRYYYpg1dkLxcygy8cd8MXPt08qDjKCgSeHQJoRxD_l8#">Webflow
+    link
+  </a>
   <form id="register-form">
-    Channel ID: <input type="text" name="fname"><br>
-    Channel secret: <input type="text" name="lname"><br><br>
-    Channel access token: <input type="text" name="lname"><br><br>
-    Event keyword: <input type="text" name="lname"><br><br>
-    <input type="button" onclick="register()" value="Submit">
+    Channel ID: <input type="text" name="channelAccessToken" /><br />
+    Channel secret: <input type="text" name="channelSecret" /><br /><br />
+    Channel access token: <input type="text" name="channelId" /><br /><br />
+    Event keyword: <input type="text" name="cta" /><br /><br />
+    <input type="button" onclick="register()" value="Submit" />
   </form>
 
 
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
-    function register() {
-      console.log(`document.getElementById("register-form") => `, document.getElementById("register-form"))
+    async function register() {
+      let body = {
+        "channelAccessToken": "",
+        "channelSecret": "",
+        "channelId": "",
+        "cta": ""
+      }
+
+      for (const key in body) {
+        const value = document.getElementsByName(key)[0].value
+        body[key] = value
+      }
+      console.log("🚀 ~ file: index.html:50 ~ body:", body)
+
+      const lineUserProfile = await this.getUserProfile()
+      console.log(`lineUserProfile => `, lineUserProfile)
+
+      // document.getElementById("demo").innerHTML = text;
     }
     function logOut() {
       liff.logout()
@@ -46,26 +66,38 @@
       liff.login({ redirectUri: window.location.href })
     }
     async function getUserProfile() {
-      const profile = await liff.getProfile()
-      document.getElementById("pictureUrl").style.display = "block"
-      document.getElementById("pictureUrl").src = profile.pictureUrl
-    }
-    async function main() {
       await liff.init({ liffId: "1660664547-k8RXXlqX" })
+      let profile
       if (liff.isInClient()) {
-        getUserProfile()
+        profile = await liff.getProfile()
       } else {
         if (liff.isLoggedIn()) {
-          getUserProfile()
-          document.getElementById("btnLogIn").style.display = "none"
-          document.getElementById("btnLogOut").style.display = "block"
-        } else {
-          document.getElementById("btnLogIn").style.display = "block"
-          document.getElementById("btnLogOut").style.display = "none"
+          profile = await liff.getProfile()
         }
       }
+      return profile
     }
-    main()
+    // async function getUserProfile() {
+    //   const profile = await liff.getProfile()
+    //   document.getElementById("pictureUrl").style.display = "block"
+    //   document.getElementById("pictureUrl").src = profile.pictureUrl
+    // }
+    // async function main() {
+    //   await liff.init({ liffId: "1660664547-k8RXXlqX" })
+    //   if (liff.isInClient()) {
+    //     getUserProfile()
+    //   } else {
+    //     if (liff.isLoggedIn()) {
+    //       getUserProfile()
+    //       document.getElementById("btnLogIn").style.display = "none"
+    //       document.getElementById("btnLogOut").style.display = "block"
+    //     } else {
+    //       document.getElementById("btnLogIn").style.display = "block"
+    //       document.getElementById("btnLogOut").style.display = "none"
+    //     }
+    //   }
+    // }
+    // main()
   </script>
 </body>
 
