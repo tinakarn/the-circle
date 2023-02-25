@@ -23,12 +23,21 @@
 </head>
 
 <body>
-  <h1>Page 2</h1>
-  <img id="pictureUrl">
-  <button id="btnLogIn" onclick="logIn()">Log In</button>
-  <button id="btnLogOut" onclick="logOut()">Log Out</button>
+  <form id="register-form">
+    Channel ID: <input type="text" name="fname"><br>
+    Channel secret: <input type="text" name="lname"><br><br>
+    Channel access token: <input type="text" name="lname"><br><br>
+    Event keyword: <input type="text" name="lname"><br><br>
+    <input type="button" onclick="register()" value="Submit">
+  </form>
+
+
+
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <script>
+    function register() {
+      console.log(`document.getElementById("register-form") => `, document.getElementById("register-form"))
+    }
     function logOut() {
       liff.logout()
       window.location.reload()
