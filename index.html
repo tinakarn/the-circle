@@ -44,7 +44,7 @@
     console.log("Hello World!")
   </script> -->
 
-  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <script src="https://static.line-scdn.net/liff/edge/2.1/sdk.js"></script>
   <script>
     function createUniversalLink() {
     }
@@ -74,31 +74,16 @@
     }
 
     async function getUserProfile() {
-      const profile = await liff.getProfile()
-      profile.getElementById("pictureUrl").src = profile.pictureUrl
-      profile.getElementById("userId").append(profile.userId)
     }
 
     function getEnvironment() {
     }
 
     async function main() {
-      const liffId = "1660664547-5b0zzMoz"
-      console.log("🚀 ~ file: index.html:87 ~ liffId:", liffId)
-      liff
-        .init({
-          liffId: liffId, // Use own liffId
-        })
-        .then(() => {
-          // Start to use liff's api
-          getUserProfile()
-        })
-        .catch((err) => {
-          // Error happens during initialization
-          console.log(err.code, err.message);
-        });
-      // await liff.init({ liffId })
+      const liffId = '1660664547-5b0zzMoz'
+      await liff.init({ liffId })
       // getEnvironment()
+      // getUserProfile()
       // getContext()
       // getFriendship()
       // createUniversalLink()
