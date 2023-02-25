@@ -80,13 +80,12 @@
     }
 
     function getEnvironment() {
-      document.getElementById("os").append(liff.getOS())
     }
 
     async function main() {
       await liff.init({ liffId: "1660664547-5b0zzMoz" })
       // getEnvironment()
-      await getUserProfile()
+      getUserProfile()
       // getContext()
       // getFriendship()
       // createUniversalLink()
