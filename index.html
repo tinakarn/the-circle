@@ -80,12 +80,17 @@
     }
 
     async function main() {
-      const liffId = '1660664547-5b0zzMoz'
-      await liff.init({ liffId })
-      const profile = await liff.getProfile()
-      console.log("🚀 ~ file: index.html:78 ~ profile:", profile)
-      profile.getElementById("pictureUrl").src = profile.pictureUrl
-      profile.getElementById("userId").append(profile.userId)
+      const liffId = '1660664547-k8RXXlqX'
+      console.log("🚀 ~ file: index.html:84 ~ liffId:", liffId)
+      try {
+        await liff.init({ liffId })
+        const profile = await liff.getProfile()
+        console.log("🚀 ~ file: index.html:78 ~ profile:", profile)
+        profile.getElementById("pictureUrl").src = profile.pictureUrl
+        profile.getElementById("userId").append(profile.userId)
+      } catch (error) {
+        console.log("🚀 ~ file: index.html:88 ~ error:", error)
+      }
       // getEnvironment()
       // getUserProfile()
       // getContext()
